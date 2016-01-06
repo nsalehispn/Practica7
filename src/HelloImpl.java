@@ -19,7 +19,15 @@ class HelloImpl extends HelloPOA {
     String msg = "\nHello world !! with Java-IDL\n";
     return msg; 
   }
-    
+  // implement sum() method
+   /*  int[] sum(int[] a,int[] b)
+     {
+       int result[]=new int[a.length];
+       int i=0;
+       for(i=0;i<a.length;i++)
+            result[i]=a[i]+b[i];
+       return result;    
+     }*/
   // implement shutdown() method
   public void shutdown() {
     orb.shutdown(false);
