@@ -25,3 +25,8 @@
    intercambio de datos que aveses es una proceso con menos seguridad, utiliza unos metodos de un objeto remote 
    que esta disponible a traves un servidor y la herramienta corba es lo mismo pero con capacidad añadio asi que 
    se puede utilizar entre distintos languajes y plataformas .
+   y tambien hay que memorizar estos.
+   IDL(Interface Definition Language)
+   OMG(Object Management Group)
+   ORB(Object Request Broker)
+   Corba(Common Object Request Broker Architecture)
