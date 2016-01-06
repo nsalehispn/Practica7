@@ -1,0 +1,14 @@
+
+1.  Implementar una aplicación cliente/servidor usando *Java IDL* 
+    en la cual el servicio que ofrece el objeto remoto es un método 
+    que suma los elementos de dos arrays. 
+    El cliente ha de instanciar dos arrays de enteros e invocar 
+    al método remoto para que realice la suma y devuelva el array resultado. 
+
+2. Utilizar el método *currentTimeMillis()* de la clase System para establecer un
+   cronómetro en el cliente del ejercicio anterior ¿Cuánto tiempo consume la implementación?
+
+3. ¿Qué se puede decir, con respecto al tiempo que consumen, si se compara con
+   las implementaciones realizadas en las prácticas anteriores con Sockets y RMI? 
+
+4. Escriba una breve comparativa de las tres herramientas.
