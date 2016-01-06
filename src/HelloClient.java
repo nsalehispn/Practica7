@@ -3,6 +3,7 @@ import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
 import java.util.*;
+import java.lang.*;
 
 public class HelloClient {
   static Hello helloImpl;
