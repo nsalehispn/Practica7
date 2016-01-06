@@ -4,11 +4,24 @@
     que suma los elementos de dos arrays. 
     El cliente ha de instanciar dos arrays de enteros e invocar 
     al método remoto para que realice la suma y devuelva el array resultado. 
-
+    ------------------------------------
+    Ya estan implementado.
+********************************************************************************************    
 2. Utilizar el método *currentTimeMillis()* de la clase System para establecer un
    cronómetro en el cliente del ejercicio anterior ¿Cuánto tiempo consume la implementación?
-
+   -------------------------------------
+   1 ms
+*********************************************************************************************   
 3. ¿Qué se puede decir, con respecto al tiempo que consumen, si se compara con
    las implementaciones realizadas en las prácticas anteriores con Sockets y RMI? 
-
+   -------------------------------------
+   Se pede decir en el caso de sockets habia una coneccion directa entre server y cliente 
+   para intercambio de los datos y claro normalmente este proceso lleva mas tiempo(proporcionalmente del cantidad de los datos)
+   y por eso medio tiempo concumido puede ser mas grande que los otros .
+   en el caso de RMI el consumo del tiempo es casi igual por que estratejia es paresido.
+*********************************************************************************************
 4. Escriba una breve comparativa de las tres herramientas.
+   Herramiento de sockets realiza un intercambia de datos entre server y client pero en RMI en ves de 
+   intercambio de datos que aveses es una proceso con menos seguridad, utiliza unos metodos de un objeto remote 
+   que esta disponible a traves un servidor y la herramienta corba es lo mismo pero con capacidad añadio asi que 
+   se puede utilizar entre distintos languajes y plataformas .
