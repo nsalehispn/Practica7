@@ -1,7 +1,9 @@
 module HelloApp {
   interface Hello {
     string sayHello();
-     string  sum(in  string  a ,in  string   b  );
+    typedef   long arraymio[10]; 
+    arraymio  sum(in  arraymio  a ,in  arraymio   b);
+    
     oneway void shutdown();
   };
 };

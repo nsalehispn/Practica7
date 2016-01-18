@@ -32,7 +32,7 @@ public class HelloClient {
       System.out.println(helloImpl.sayHello());
        start=System.currentTimeMillis();
        System.out.println("\nstart:"+start);
-       int[] a={1,1,1,1,1,1,1,1,1,1};
+       int[] a={10,10,10,10,10,10,10,10,10,10};
        int[] b={2,2,2,2,2,2,2,2,2,2};
        int[] r=new int[10];
        
