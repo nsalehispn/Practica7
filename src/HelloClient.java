@@ -1,4 +1,4 @@
-//import HelloApp.*;
+import HelloApp.*;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
@@ -12,7 +12,11 @@ public class HelloClient {
     try{
       // create and initialize the ORB
       ORB orb = ORB.init(args, null);
-
+       long start=0;
+       long end=0;
+ 
+     
+       
       // get the root naming context
       org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
 
@@ -26,23 +30,26 @@ public class HelloClient {
 
       System.out.println ("Obtained a handle on server object: " + helloImpl);
       System.out.println(helloImpl.sayHello());
-      /*
-       long start=0;
-       long end=0;
-       int a[]={1,1,1,1,1,1,1,1,1,1};
-       int b[]={2,2,2,2,2,2,2,2,2,2};
-       int r[]=new int[10];
-       start=System.currentTimeMillis();       
+       start=System.currentTimeMillis();
+       System.out.println("\nstart:"+start);
+       int[] a={1,1,1,1,1,1,1,1,1,1};
+       int[] b={2,2,2,2,2,2,2,2,2,2};
+       int[] r=new int[10];
+       
        r=helloImpl.sum(a,b);
        end=System.currentTimeMillis();
+       System.out.println("\nend:"+end);
+
+      
        System.out.println("\n La resultado de la suma de los dos array es:");
        int i;
        for(i=0;i<10;i++)
-         System.out.print("\tr[i]");
-       System.out.println("--------- La suma realizo en :"+end-start+"  segundos-----------------------------");  
-      */
+           System.out.print("\t"+r[i]);
+       
+       System.out.println("--------- La suma realizo en :"+(end-start));  
       
-      helloImpl.shutdown();
+      
+       helloImpl.shutdown();
    
   
     } 

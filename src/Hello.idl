@@ -1,7 +1,7 @@
 module HelloApp {
   interface Hello {
     string sayHello();
-    //int[] sum(int[] a,int[] b);
+     string  sum(in  string  a ,in  string   b  );
     oneway void shutdown();
   };
 };
