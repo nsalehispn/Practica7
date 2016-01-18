@@ -4,29 +4,1624 @@
     que suma los elementos de dos arrays. 
     El cliente ha de instanciar dos arrays de enteros e invocar 
     al método remoto para que realice la suma y devuelva el array resultado. 
-    ------------------------------------
+    -----------------------------------------------------
     Ya estan implementado.
 ********************************************************************************************    
 2. Utilizar el método *currentTimeMillis()* de la clase System para establecer un
    cronómetro en el cliente del ejercicio anterior ¿Cuánto tiempo consume la implementación?
-   -------------------------------------
-   1 ms
+   ------------------------------------------------------
+   El tiempo consumido en distintos ejecuciones (10 ejecuciones) son:
+   1- 4ms
+   2- 5ms
+   3- 9ms
+   4- 169ms
+   5- 157ms
+   6- 9ms
+   7- 4ms 
+   8- 6ms 
+   9- 4ms
+   10-6ms
 *********************************************************************************************   
 3. ¿Qué se puede decir, con respecto al tiempo que consumen, si se compara con
    las implementaciones realizadas en las prácticas anteriores con Sockets y RMI? 
-   -------------------------------------
-   Se pede decir en el caso de sockets habia una coneccion directa entre server y cliente 
-   para intercambio de los datos y claro normalmente este proceso lleva mas tiempo(proporcionalmente del cantidad de los datos)
-   y por eso medio tiempo concumido puede ser mas grande que los otros .
-   en el caso de RMI el consumo del tiempo es casi igual por que estratejia es paresido.
+   ------------------------------------------------------
+   Tiempo consumido en practica de socket :94ms
+   Medio tiempo consumido en practica RMI :316ms
+   Medio tiempo consumido en practica orb :37ms
+   El tiempo cosumido en el ORB(CORBA) es mas menos que los anterior entonces es un tecnico valoroso
+   con respeto del tiempo consumido y tambien sus multi lenguaje y multi plataforma caracteristica.
 *********************************************************************************************
 4. Escriba una breve comparativa de las tres herramientas.
-   Herramiento de sockets realiza un intercambia de datos entre server y client pero en RMI en ves de 
-   intercambio de datos que aveses es una proceso con menos seguridad, utiliza unos metodos de un objeto remote 
-   que esta disponible a traves un servidor y la herramienta corba es lo mismo pero con capacidad añadio asi que 
-   se puede utilizar entre distintos languajes y plataformas .
-   y tambien hay que memorizar estos.
+   -------------------------------------------------------
+   Herramiento de sockets realiza un intercambia de datos entre server y client pero en RMI 
+   se utiliza unos metodos de un objeto remote que esta disponible a traves un 
+   servidor(RMI) y la herramienta corba es lo mismo pero con capacidad añadio asi que se puede utilizar 
+   entre distintos lenguajes y plataformas .
+------------------------------------------------------------------------------------------------------------------------------
+Informacion aprendido:
+Para ejecutar este practica hay que hacer estos pasos:
+1-Compilar fichero Hello.idl con comando      (idlj -fall  Hello.idl)  
+2-Compilar todos los fichero java con comando (javac *.java)
+3-Recompilar los ficheros java con el comando (-Xlint:unchecked *.java)
+4-Actuar el servidor ORB con el comando       (orbd  -ORBInitialPort 1050 &) 
+5-Activar el servidor Hello con el comando    (java HelloServer   -ORBInitialHost localhost -ORBInitialPort 1050 $)
+6-Ejecutar el cliente Hello con el comando    (jave HelloCliente  -ORBInitialHost localhost -ORBInitialPort 1050 $)
+------------------------------------------------------------------------------------------------------------------------------
+Informacion aprendido:
+  
    IDL(Interface Definition Language)
    OMG(Object Management Group)
    ORB(Object Request Broker)
    Corba(Common Object Request Broker Architecture)
+
+Punto importante1:
+ orbd -ORBInitialPort  1050   -ORBInitialHost localhost 
+ 
+Punto importante2:
+Para compilar Hello.idl y generar 5 fichero dentro de helloapp tenemos que ejecutar
+ idlj -fall  Hello.idl
+------------------------------------------------------------------------------------------------------------------------------
+En este practica hemos aprendido como programar en entorno IDL por eso hay que saber los siguiente informaciones
+
+
+Chapter 11: IDL to C++ Language Mapping
+
+This chapter discusses the IDL to C++ language mapping provided by the VisiBroker IDL to C++ compiler, which complies strictly with the CORBA C++ language mapping specification. This chapter includes the following major sections:
+Primitive Data Types
+
+Strings
+
+Constants
+
+Enumerations
+
+Type Definitions
+
+Modules
+
+Complex Data Types
+
+
+Primitive Data Types
+
+The basic data types provided by the Interface Definition Language are summarized in Table 11-1. Due to hardware differences between platform, some of the IDL primitive data types have a definition that is marked "platform dependent." On a platform that has 64-bit integral representations, for example, the CORBA::Long type would still be only 32 bits. You should consult the include file orbtypes.h for an exact mapping of these primitive data types for your particular platform.
+The following section lists the mapping of primitive data types. The IDL type is given first followed by the VisiBroker type and the C++ definition.
+
+IDL Type: short
+
+VisiBroker Type: CORBA::Short
+
+C++ Definition: short
+
+
+IDL Type: long
+
+VisiBroker Type: CORBA::Long
+
+C++ Definition: platform dependent
+
+
+IDL Type: unsigned short
+
+VisiBroker Type: CORBA::UShort
+
+C++ Definition: unsigned short
+
+
+IDL Type: unsigned long
+
+VisiBroker Type: CORBA::ULong
+
+C++ Definition: unsigned long
+
+
+IDL Type: float
+
+VisiBroker Type: CORBA::Float
+
+C++ Definition: float
+
+
+IDL Type: double
+
+VisiBroker Type: CORBA::Double
+
+C++ Definition: double
+
+
+IDL Type: char
+
+VisiBroker Type: CORBA::Char
+
+C++ Definition: char
+
+
+IDL Type: boolean
+
+VisiBroker Type: CORBA::Boolean
+
+C++ Definition: unsigned char
+
+
+IDL Type: octet
+
+VisiBroker Type: CORBA::Octet
+
+C++ Definition: unsigned char
+
+
+IDL Type: longlong
+
+VisiBroker Type: CORBA::LongLong
+
+C++ Definition: platform dependent
+
+
+IDL Type: ulonglong
+
+VisiBroker Type: CORBA::ULongLong
+
+C++ Definition: platform dependent
+
+
+Caution: The IDL boolean type is defined by the CORBA specification to have only one of two values: 1 or 0. Using other values for a boolean will result in undefined behavior.
+
+Strings
+
+String types in IDL may specify a length or may be unbounded, but both are mapped to the C++ type char *. You must use the functions shown in Figure 11-2 for dynamically allocating strings to ensure that your applications and VisiBroker use the same memory management facilities. All CORBA string types are null-terminated.
+The following example shows the methods for allocating and freeing memory for strings.
+
+
+
+class CORBA
+
+{
+
+
+	...
+
+
+	static char *string_alloc(CORB::ULong len);
+
+
+	static void string_free(char *data);
+
+
+	...
+
+
+};
+
+The following section lists CORBA string allocation and release methods. The method is given first followed by the description.
+CORBA::string_alloc
+
+Dynamically allocates a string and returns a pointer to the string. A NULL pointer is returned if the allocation fails. The length specified by the len parameter does not need to include the NULL terminator.
+
+CORBA::string_free
+
+Releases the memory associated with a string that was allocated with CORBA::string_alloc.
+
+
+String_var Class
+
+In addition to mapping an IDL string to a char *, the VisiBroker IDL to C++ compiler generates a String_var class that contains a pointer to the memory allocated to hold the string. When a String_var object is destroyed or goes out of scope, the memory allocated to the string is automatically freed. The following example shows the String_var class and the methods it supports..
+
+
+class CORBA 		{
+
+	class String_var {
+
+
+		protected:
+
+
+			char	*_p;
+
+
+			...
+
+
+		public:
+
+
+			String_var();
+
+
+			String_var(char *p);
+
+
+			~String_var();
+
+
+			String_var&		operator=(const char *p);
+
+
+			String_var&		operator=(char *p);
+
+
+			String_var&		operator=(const String_var& s);
+
+
+			operator const char *() const;
+
+
+			operator char *();
+
+
+			char &operator[](CORBA::ULong index);
+
+
+			char operator[](CORBA::ULong index) const;
+
+
+			friend ostream&		operator<<(ostream&, const String_var& );
+
+
+			inline friend Boolean		operator==(const String_var& s1,
+
+
+								const String_var& s2);
+
+
+			...
+
+
+	};
+
+
+	...
+
+
+};
+
+Constants
+
+The following example shows top-level constant definitions in IDL and the resulting C++ code.
+
+
+// These top-level definitions in IDL
+
+const string			str_example = "this is an example";
+
+
+const long			long_example = 100;
+
+
+const boolean			bool_example = TRUE;
+
+
+...
+
+
+
+
+// Result in the generation of this C++ code
+
+
+const char *			str_example = "this is an example";
+
+
+const CORBA::Long		long_example = 100;
+
+
+const CORBA::Boolean		bool_example = 1;
+
+
+
+The following example shows constant definitions within an interface specification and the resulting C++ code.
+
+
+// These definitions are in the IDL file example.idl
+
+interface example {
+
+
+	const string		str_example = "this is an example";
+
+
+	const long		long_example = 100;
+
+
+	const boolean		bool_example = TRUE;
+
+
+};
+
+
+...
+
+
+
+
+// Result in the generation of this C++ code in example_client.hh
+
+
+class example :: public virtual CORBA::Object
+
+
+{
+
+
+	...
+
+
+	static const char *			str_example; /* "this is an example" */
+
+
+	static const CORBA::Long		long_example; /* 100 */
+
+
+	static const CORBA::Boolean		bool_example; /* 1 */
+
+
+	...
+
+
+};
+
+
+
+
+...
+
+
+
+
+// And the generation of this C++ code in example_client.cc
+
+
+const char *				example::str_example = "this is an example";
+
+
+const CORBA::Long			example::long_example = 100;
+
+
+const CORBA::Boolean			example::bool_example = 1;
+
+
+
+Under some circumstances, the IDL compiler must generate C++ code containing the value of an IDL constant rather than the name of the constant. The following example shows how the value of the constant length must be generated for the typedef V to allow the C++ code to compile properly.
+
+
+// IDL
+
+interface foo {
+
+
+	const long length = 10;
+
+
+	typedef long V[length];
+
+
+};
+
+
+...
+
+
+
+
+// Results in this C++ code being generated by the IDL compiler
+
+
+class foo : public virtual CORBA::Object
+
+
+{
+
+
+	const CORBA::Long length;
+
+
+	typedef CORBA::Long V[10];
+
+
+};
+
+Enumerations
+
+The following example shows how enumerations in IDL map directly to C++ enumerations.
+
+
+// IDL
+
+enum enum_type {
+
+
+	first,
+
+
+	second,
+
+
+	third
+
+
+};
+
+
+
+
+// Results in this C++ code
+
+
+enum enum_type {
+
+
+	first,
+
+
+	second,
+
+
+	third
+
+
+};
+
+Type Definitions
+
+The following example shows how type definitions in IDL are mapped directly to C++ type definitions. If the original IDL type definition maps to several C++ types, the IDL compiler generates the corresponding aliases for each type in C++.
+
+// IDL
+
+typedef octet		example_octet;
+
+
+typedef enum enum_values {
+
+
+	first,
+
+
+	second,
+
+
+	third
+
+
+} enum_example;
+
+
+
+
+// Results in the generation of this C++ code
+
+
+typedef octet		example_octet;
+
+
+enum enum_values {
+
+
+	first,
+
+
+	second,
+
+
+	third
+
+
+};
+
+
+typedef enum_values enum_example;
+
+The following example shows the mapping of an IDL interface type definition to C++.
+
+// IDL
+
+interface A1;
+
+
+typedef A1 A2;
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code
+
+
+class A1;
+
+
+typedef A1 *A1_ptr;
+
+
+typedef A1_ptr A1Ref;
+
+
+class A1_var;
+
+
+
+
+typedef A1 A2;
+
+
+typedef A1_ptr A2_ptr;
+
+
+typedef A1Ref A2Ref;
+
+
+typedef A1_var A2_var;
+
+
+
+
+
+The following example shows the mapping an IDL sequence type definition to C++.
+
+
+
+// IDL
+
+typedef sequence<long> S1;
+
+typedef S1 S2;
+
+...
+
+
+
+// Results in the generation of this C++ code
+
+class S1;
+
+typedef S1 *S1_ptr;
+
+typedef S1_ptr S1Ref;
+
+class S1_var;
+
+
+
+typedef S1 S2;
+
+typedef S1_ptr S2_ptr;
+
+typedef S1Ref S2Ref;
+
+typedef S1_var S2_var;
+
+ Modules
+
+
+
+The OMG IDL to C++ language mapping specifies that an IDL module should be mapped to a C++ namespace with the same name. Since few compilers currently support the namespace,the C++ language mapping allows the use of class in its place. Figure 11-12 shows how VisiBroker's IDL compiler maps module to class.
+
+
+The following example shows the mapping of an IDL module to a C++ class.
+
+
+
+
+// IDL
+
+module ABC
+
+
+{
+
+
+	// Definitions
+
+
+	...
+
+
+};
+
+
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code
+
+
+class ABC
+
+
+{
+
+
+	// Definitions
+
+
+	...
+
+
+};
+
+
+ Complex Data Types
+
+
+
+The C++ mappings for IDL structures, unions, sequences and arrays depend on whether or not the data members they contain are of a fixed or variable length. These types are considered to have variable lengths and, consequently, any complex data type that contains them will also have a variable length.
+
+
+
+The any type.
+
+The string type, bounded or unbounded.
+
+The sequence type, bounded or unbounded.
+
+An object reference.
+
+Other structures or unions that contain a variable-length member.
+
+An array with variable-length elements.
+
+A typedef with variable-length elements.
+
+The following section shows a summary of the C++ mappings for complex data types. The IDL type is given first followed by the C++ mapping.
+
+
+IDL Type: struct (fixed length)
+
+
+
+C++ mapping: struct
+
+
+
+
+
+
+IDL Type: struct (variable length)
+
+
+
+C++ mapping: struct (_var types for variable length members)
+
+
+
+
+
+
+IDL Type: union
+
+
+
+C++ mapping: class and _var class
+
+
+
+
+
+
+IDL Type: sequence
+
+
+
+C++ mapping: class and _var class
+
+
+
+
+
+
+IDL Type: array
+
+
+
+C++ mapping: array
+
+
+
+
+ Fixed-length Structures
+
+
+
+The following example shows how fixed-length structures in IDL are mapped to C++ code. In addition to the structure, VisiBroker's IDL compiler will also generate an example_var class for the structure. 
+
+
+
+// IDL
+
+struct example {
+
+
+	short a;
+
+
+	long b;
+
+
+};
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code.
+
+
+struct example {
+
+
+	CORBA::Short a;
+
+
+	CORBA::Long b;
+
+
+};
+
+
+
+
+class example_var
+
+
+{
+
+
+	...
+
+
+	private:
+
+
+		example *_ptr;
+
+
+};
+
+
+The following example shows how you might use the struct and class.
+
+
+// Declare an example struct and initialize its fields.
+
+example ex1 = { 2, 5 };
+
+
+
+// Declare a _var class and assign it to a newly created example structure.
+
+// This results in the _ptr pointing to an allocated struct with
+
+// uninitialized fields.
+
+example_var ex2 = new example;
+
+
+
+// Initialize the fields of ex2 from ex1
+
+ex2->a = ex1.b;
+
+Figure 11-1	 Use of the example structure and the example_var class.
+
+
+
+To access the fields of the _var class ex2, the -> operator must always be used. When ex2 goes out of scope, the memory allocated to it will be freed automatically.
+
+
+
+ Variable Length Structures
+
+
+
+The following example shows how you could modify the example structure, replacing the long member with a string and adding an object reference, to change to a variable-length structure.
+
+
+
+// IDL
+
+interface ABC {
+
+
+	// Definitions ...
+
+
+};
+
+
+struct vexample {
+
+
+	short		a;
+
+
+	ABC		c;
+
+
+	string		name;
+
+
+};
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code
+
+
+struct vexample {
+
+
+	CORBA::Short		a;
+
+
+	ABC_var		c;
+
+
+	CORBA::String_var		name;
+
+
+	vexample&	 operator=(const vexample& s);
+
+
+};
+
+
+
+
+class vexample_var {
+
+
+	...
+
+
+};
+
+Figure 11-2	 Mapping a variable-length structure to C++.
+
+
+
+
+Notice how the ABC object reference is mapped to an ABC_var class. In a similar fashion, the string name is mapped to a CORBA::String_var class. In addition, an assignment operator is also generated for variable-length structures.
+
+
+
+ Memory Management for Structures
+
+
+
+The use of _var classes in variable-length structures ensures that memory allocated to the variable-length members are managed transparently.
+
+
+
+If a structure goes out of scope, all memory associated with variable-length members is automatically freed.
+
+If a structure is initialized or assigned and then re-initialized or re-assigned, the memory associated with the original data is always freed.
+
+When a variable-length member is assigned to an object reference, a copy is always made of the object reference. If a variable-length member is assigned to a pointer, no copying takes place.
+
+ Unions
+
+
+
+The figure that follows shows how an IDL union is mapped to a C++ class with methods for setting and retrieving the value of the data members. A data member named _d of the discriminant type is also defined. The value of this discriminant is not set when the union is first created, so an application must set it before using the union. Setting any data member using one of the provided methods automatically sets the discriminant. The following section describes some of the methods in the un_ex class. The method is given first followed by the description.
+
+
+un_ex()
+
+
+
+The default constructor sets the discriminant to zero but does not initialize any of the other data members.
+
+
+
+un_ex(const un_ex& obj)
+
+
+
+The copy constructor performs a deep copy of the source object.
+
+
+
+~un_ex()
+
+
+
+The destructor frees all memory owned by the union.
+
+
+
+operator=(const un_ex& obj)
+
+
+
+The assignment operator performs a deep copy, releasing old storage, if necessary.
+
+
+
+VisiBroker's IDL compiler may also generate hash and compare methods for unions, which you can control with compiler options. See the VisiBroker for C++ Reference Guide for more information on compiler options.
+
+
+
+The following example shows the mapping of an IDL union to a C++ class. 
+
+
+
+
+// IDL
+
+struct st_ex
+
+
+{
+
+
+	long abc;
+
+
+};
+
+
+union un_ex switch(long)
+
+
+{
+
+
+	case 1: long		x; // a primitive data type
+
+
+	case 2: string		y; // a simple data type
+
+
+	case 3: st_ex		z; // a complex data type
+
+
+};
+
+
+...
+
+
+	
+
+
+// Results in the generation of this C++ code
+
+
+struct st_ex
+
+
+{
+
+
+	CORBA::Long		abc;
+
+
+};
+
+
+
+
+class un_ex
+
+
+{
+
+
+	private:
+
+
+		CORBA::Long		_d;
+
+
+		CORBA::Long		_x;
+
+
+		CORBA::String_var	_y;
+
+
+		st_ex			_z;
+
+
+	public:
+
+
+		un_ex();
+
+
+		~un_ex();
+
+
+		un_ex(const un_ex& obj);
+
+
+		un_ex&		operator=(const un_ex& obj);
+
+
+		void		_d(CORBA::Long val);
+
+
+		CORBA::Long	_d() const;
+
+
+		void		x(CORBA::Long val);
+
+
+		CORBA::Long	x() const;
+
+
+		void		y(char *val);
+
+
+		void		y(const char *val);
+
+
+		void		y(const CORBA::String_var& val);
+
+
+		const char	*y() const;
+
+
+		const st_ex&	z() const;
+
+
+		st_ex&		z();
+
+
+	...
+
+
+}
+
+
+ Managed Types for Unions
+
+
+
+In addition to the un_ex class shown in the preceding example, a un_ex_var class would also be generated. 
+
+
+
+ Memory Management for Unions
+
+
+
+Here are some important points to remember about memory management of complex data types within a union:
+
+
+
+When you use an accessor method to set the value of a data member, a deep copy is performed. You should pass parameters to accessor methods by value, for smaller types, or by a constant reference, for larger types.
+
+When you set a data member using an accessor method, any memory previously associated with that member is freed. If the member being assigned is an object reference, the reference count of that object will be incremented before the accesor method returns.
+
+A char * accessor method will free any storage before ownership of the passed pointer is assumed. 
+
+Both const char * and String_var accessor methods will free any old memory before the new parameter's storage is copied.
+
+Accessor methods for array data members will return a pointer to the array slice. For more information, see "Array Slices" on page  11-21.
+
+ Sequences
+
+
+
+IDL sequences, both bounded and unbounded, are mapped to a C++ class that has a current length and a maximum length. The maximum length of a bounded sequence is defined by the sequence's type. Unbounded sequences can specify their maximum length when their C++ constructor is called. The current length can be modified programmatically. Figure 11-19 shows how an IDL sequence is mapped to a C++ class with accessor methods.
+
+
+Note: When the length of an unbounded sequence exceeds the maximum length you specify, VisiBroker will transparently allocate a larger buffer, copy the old buffer to the new buffer and free the memory allocated to the old buffer. However, no attempt will be made to free any unused memory if the maximum length decreases.
+
+
+
+The following example shows the mapping of an IDL unbounded sequence to a C++ class.
+
+
+
+
+// IDL
+
+typedef sequence<long> LongSeq;
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code
+
+
+class LongSeq
+
+
+{
+
+
+	public:
+
+
+		LongSeq(CORBA::ULong max=0);
+
+
+		LongSeq(CORBA::ULong max=0, CORBA::ULong length,
+
+
+				CORBA::Long *data, CORBA::Boolean release = 0);
+
+
+		LongSeq(const LongSeq&);
+
+
+		~LongSeq();
+
+
+		LongSeq&			operator=(const LongSeq&);
+
+
+		CORBA::ULong			maximum() const;
+
+
+		void				length(CORBA::ULong len);
+
+
+		CORBA::ULong			length() const;
+
+
+		const CORBA::ULong&		operator[](CORBA::ULong index) const;
+
+
+		...
+
+
+		static LongSeq			*_duplicate(LongSeq* ptr);
+
+
+		static void			_release(LongSeq *ptr);
+
+
+		static CORBA::Long		*allocbuf(CORBA::ULong nelems);
+
+
+		static void			freebuf(CORBA::Long *data);
+
+
+	private:
+
+
+		CORBA::Long		*_contents;
+
+
+		CORBA::ULong		_count;
+
+
+		CORBA::ULong		_num_allocated:
+
+
+		CORBA::Boolean		_release_flag;
+
+
+		CORBA::Long		_ref_count;
+
+
+};
+
+
+The following section lists the LongSeq methods. The method is given first followed by the description.
+
+
+LongSeq(CORBA::ULong max=0)
+
+
+
+The constructor for an unbounded sequence takes a maximum length as an argument. Bounded sequences have a defined maximum length.
+
+
+
+LongSeq(CORBA::ULong max=0,
+        CORBA::ULong length,
+        CORBA::Long *data,
+      CORBA::Boolean release=0)
+
+
+
+This constructor allows you to set the maximum length, the current length, a pointer to the data buffer associated and a release flag. If release is not zero, VisiBroker will free memory associated with the data buffer when increasing the size of the sequence. If release is zero, the old data buffer's memory is not freed. Bounded sequences have all of these parameters except for max.
+
+
+
+LongSeq(const LongSeq&)
+
+
+
+The copy constructor performs a deep copy of the source object.
+
+
+
+~LongSeq();
+
+
+
+The destructor frees all memory owned by the sequence only if the release flag had a non-zero value when constructed.
+
+
+
+operator=(const LongSeq&j)
+
+
+
+The assignment operator performs a deep copy, releasing old storage, if necessary.
+
+
+
+maximum()
+
+
+
+Returns the size of the sequence
+
+
+
+length()
+
+
+
+Two methods are defined for setting and returning the length of the sequence.
+
+
+
+operator[]()
+
+
+
+Two indexing operators are provided for accessing an element within a sequence. One operator allows the element to be modified and one allows only read access to the element.
+
+
+
+_release()
+
+
+
+Releases the sequence. If the constructor's release flag was non-zero when the object was created and the sequence element type is a string or object reference, each element will be released before the buffer is released.
+
+
+
+allocbuf()
+freebuf()
+
+
+
+You should use these two static methods to allocate or free any memory used by a sequence.
+
+
+
+
+ Managed Types for Sequences
+
+
+
+In addition to the LongSeq class shown previously, a LongSeq_var class would also be generated. In addition to the usual _var methods, there are two indexing methods defined for sequences. The following example shows the two indexing methods added for _var classes representing sequences.
+
+
+CORBA::Long& operator[](CORBA::ULong index);
+
+const CORBA::Long& operator[](CORBA::ULong idex) const ;
+
+ Memory Management for Sequences
+
+
+
+You should carefully consider the memory management issues listed below. Figure 11-22 contains sample C++ code that illustrates these points.
+
+
+
+If the release flag was set to a non-zero value when the sequence was created, the sequence will assume management of the user's memory. When an element is assigned, the old memory is freed before ownership of the memory on the right hand side of the expression is assumed.
+
+If the release flag was set to a non-zero value when the sequence was created and the sequence elements are strings or object references, each element will be released before the sequence's contents buffer is released and the object is destroyed.
+
+Avoid assigning a sequence element using the [] operator unless the release flag was set to one, or memory management errors may occur.
+
+Sequences created with the release flag set to zero should not be used as input/output parameters because memory management errors in the object server may result.
+
+Always use allocbuf and freebuf to create and free storage used with sequences.
+
+The following example shows memory management with two bounded sequences.
+
+
+
+// Given this IDL specification for a bounded sequence
+
+typedef sequence<string, 3> String_seq;
+
+
+...
+
+
+
+
+// Consider this C++ code
+
+
+char *static_array[] = ("1", "2", "3"};
+
+
+char *dynamic_array = StringSeq::allocbuf(3);
+
+
+
+
+// Create a sequence, release flag is set to FALSE by default
+
+
+StringSeq static_seq(3, static_array);
+
+
+// Create another sequence, release flag set to TRUE
+
+
+StringSeq dynamic_seq(3, dynamic_array, 1);
+
+
+
+
+static_seq[1] = "1";		// old memory not freed, no copying occurs
+
+
+
+
+char *str = string_alloc(2); 
+
+
+dynamic_seq[1] = str;		// old memory is freed, no copying occurs
+
+
+ Arrays
+
+
+
+IDL arrays are mapped to C++ arrays, which can be statically initialized. If the array elements are strings or object references, the elements of the C++ array will be of the type _var. The following example shows three arrays with different element types.
+
+
+// IDL
+
+interface Intf
+
+{
+
+			// definitions...
+
+};
+
+typedef long L[10];
+
+typedef string S[10];
+
+typedef Intf A[10];
+
+...
+
+
+
+// Results in the generation of this C++ code
+
+typedef CORBA::Long L[10];
+
+typedef CORBA::String_var S[10];
+
+typedef Intf_var A[10];
+
+The use of the managed type, _var, for strings and object references, allows memory to be managed transparently when array elements are assigned.
+
+
+
+ Array Slices
+
+
+
+The array_slice type is used when passing parameters for multi-dimensional arrays. VisiBroker's IDL compiler also generates a _slice type for arrays that contains all but the first dimension of the array. The array _slice type provides a convenient way to pass and return parameters. The following example shows two examples of the _slice type.
+
+
+// IDL
+
+typedef long L[10];
+
+typedef string str[1][2][3];
+
+...
+
+
+
+// Results in the generation of these slices
+
+typedef CORBA::Long L_slice[10];
+
+typedef CORBA::String_var str_slice[2][3];
+
+typedef str_slice *str_slice_ptr;
+
+ Managed Types for Arrays
+
+
+
+In addition to generating a C++ array for IDL arrays, VisiBroker's IDL compiler will also generate a _var class. This class offers some additional features for array.
+
+
+
+The operator[] is overloaded to provide intuitive access to array elements.
+
+A constructor and assignment operator are provided that take a pointer to an array _slice object as an argument.
+
+The following example shows the _var class generated for arrays.
+
+
+
+// IDL
+
+typedef long L[10];
+
+
+...
+
+
+
+
+// Results in the generation of this C++ code
+
+
+class L_var
+
+
+{
+
+
+	public:
+
+
+		L_var();
+
+
+		L_var(L_slice *slice);
+
+
+		L_var(const L_var& var);
+
+
+		~L_var();
+
+
+		L_var&	operator=(L_slice *slice);
+
+
+		L_var&	operator=(const L_var& var);
+
+
+		CORBA::Long&	operator[](CORBA::ULong index);
+
+
+		operator L_slice *();
+
+
+		operator L &() const;
+
+
+		...
+
+
+	private:
+
+
+		L_slice	*_ptr;
+
+
+};
+
+
+ Type-safe Arrays
+
+
+
+A special _forany class is generated to handle arrays with elements mapped to the type any. As with the _var class, the _forany class allows you to access the underlying array type. The _forany class does not release any memory upon destruction because the any type maintains ownership of the memory. The _forany class is not implemented as a typedef because it must be distinguishable from other types for overloading to functions properly.
+
+
+The following example shows the _forany class generated for an IDL array.
+
+
+
+// IDL
+
+typedef long L[10];
+
+...
+
+
+
+// Results in the generation of this C++ code
+
+class L_forany
+
+{
+
+			public:
+
+				L_forany();
+
+				L_forany(L_slice *slice);
+
+				~L_forany();
+
+				CORBA::Long&	operator[](CORBA::ULong index);
+
+				const CORBA::Long&	operator[](CORBA::ULong index) const;
+
+				operator L_slice *();
+
+				operator L &() const;
+
+				operator const L & () const;
+
+				operator const L& () const;
+
+				L_forany& operator=(const L_forany obj);
+
+				...
+
+			private:
+
+				L_slice	*_ptr;
+
+};
+
+ Memory Management for Arrays
+
+
+
+VisiBroker's IDL compiler generates two functions for allocating and releasing the memory associated with arrays. These functions allow the ORB to manage memory without having to override the new and delete operators.
+
+
+The following example shows methods generated for allocating and releasing array memory.
+
+
+
+// IDL
+
+typedef long L[10];
+
+...
+
+
+
+// Results in the generation of this C++ code
+
+inline L_slice *L_alloc();							// Dynamically allocates array. Returns
+
+							// NULL on failure.
+
+
+
+inline void L_free(L_slice *data);							// Releases array memory allocated with
+
+							// L_alloc.
+
+ Principal
+
+
+
+A Principal represents information about principals requesting operations. The IDL interface of Principal does not define any operations. The Principal is implemented as a sequence of octets. The Principal is set by the client application and checked by the ORB implementation. VisiBroker for C++ treats the Principal as an opaque type.
+
+
+
+
+
+
+
+
+
+
+
+
+
